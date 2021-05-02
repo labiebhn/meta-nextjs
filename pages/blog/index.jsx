@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 import styles from '../../styles/Blog.module.css'
@@ -7,7 +7,7 @@ import Link from 'next/link';
 const host = "https://jsonplaceholder.typicode.com";
 
 export const getStaticProps = async () => {
-  const blog = await axios.get(`${host}/posts`);
+  const blog = await axios.get(`${host}/photos`);
 
   return {
     props: {
@@ -17,14 +17,17 @@ export const getStaticProps = async () => {
 }
 
 function Blog({ blog }) {
+
+  const [blogData, setBlogData] = useState(blog);
+
   return (
     <div>
       <Head>
         <title>Blog Page | Next JS</title>
         <meta name="description" content="Blog page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia fugiat corporis quidem rerum! Nemo praesentium incidunt ratione quas, natus vero officiis! Aut minus quod tenetur repellat nostrum molestiae inventore ipsam!" />
       </Head>
-      Blog list here
-      {blog.map(blog => (
+      <h1>Blog list here</h1>
+      {blogData.map(blog => (
         <Link href={`blog/${blog.id}`} key={blog.id}>
           <a>
             <h5 className={styles.link}>{blog.title}</h5>
