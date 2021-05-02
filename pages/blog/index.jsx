@@ -4,14 +4,14 @@ import axios from 'axios';
 import styles from '../../styles/Blog.module.css'
 import Link from 'next/link';
 
-const host = "http://192.168.1.8:5000/v1";
+const host = "https://jsonplaceholder.typicode.com";
 
 export const getStaticProps = async () => {
-  const blog = await axios.get(`${host}/blog`);
+  const blog = await axios.get(`${host}/posts`);
 
   return {
     props: {
-      blog: blog.data.data
+      blog: blog.data
     }
   }
 }
@@ -25,7 +25,7 @@ function Blog({ blog }) {
       </Head>
       Blog list here
       {blog.map(blog => (
-        <Link href={`blog/${blog.slug}`} key={blog.idBlog}>
+        <Link href={`blog/${blog.id}`} key={blog.id}>
           <a>
             <h5 className={styles.link}>{blog.title}</h5>
           </a>

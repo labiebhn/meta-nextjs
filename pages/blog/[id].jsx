@@ -2,15 +2,15 @@ import React from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 
-const host = "http://192.168.1.8:5000/v1";
+const host = "https://jsonplaceholder.typicode.com";
 
 export const getStaticPaths = async () => {
-  const blog = await axios.get(`${host}/blog`);
-  const data = blog.data.data;
+  const blog = await axios.get(`${host}/posts`);
+  const data = blog.data;
 
   const paths = data.map(data => {
     return {
-      params: { slug: data.slug }
+      params: { id: data.id.toString() }
     }
   });
 
@@ -21,12 +21,12 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-  const slug = context.params.slug;
-  const blog = await axios.get(`${host}/blog/slug/${slug}`);
+  const id = context.params.id;
+  const blog = await axios.get(`${host}/posts/${id}`);
 
   return {
     props: {
-      blog: blog.data.data
+      blog: blog.data
     }
   }
 }
@@ -36,10 +36,10 @@ function Detail({ blog }) {
     <div>
       <Head>
         <title>{blog.title}</title>
-        <meta name="description" content={blog.contentText} />
+        <meta name="description" content={blog.body} />
       </Head>
       <h1>{blog.title}</h1>
-      <p>{blog.contentText}</p>
+      <p>{blog.body}</p>
     </div>
   );
 }
