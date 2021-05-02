@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from '../../styles/Blog.module.css'
 import Link from 'next/link';
 
-const host = "http://localhost:5000/v1";
+const host = "http://192.168.1.8:5000/v1";
 
 export const getStaticProps = async () => {
   const blog = await axios.get(`${host}/blog`);

@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import axios from 'axios';
 
-const host = "http://localhost:5000/v1";
+const host = "http://192.168.1.8:5000/v1";
 
 export const getStaticPaths = async () => {
   const blog = await axios.get(`${host}/blog`);
