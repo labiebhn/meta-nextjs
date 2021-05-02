@@ -7,7 +7,7 @@ import Link from 'next/link';
 const host = "https://jsonplaceholder.typicode.com";
 
 export const getStaticProps = async () => {
-  const blog = await axios.get(`${host}/photos`);
+  const blog = await axios.get(`${host}/posts`);
 
   return {
     props: {
