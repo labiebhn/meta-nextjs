@@ -1,0 +1,9 @@
+.link {
+  padding: 8px;
+  width: auto;
+}
+
+.link:hover {
+  background-color: black;
+  color: white;
+}
